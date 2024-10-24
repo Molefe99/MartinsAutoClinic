@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">MartinsAutoClinic</string>
+    <string name="book_appointment">Book Appointment</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="appointments">APPOINTMENTS</string>
+    <string name="email_address">Email Address</string>
+    <string name="cellphone_number">Cellphone Number</string>
+    <string name="date">Date</string>
+    <string name="book">Book</string>
+    <string name="phone_hint">0123456789</string>
+    <string name="email_hint">someone@domain.com</string>
+    <string name="cancel">Cancel</string>
+    <string name="complete_header">Complete</string>
+    <string name="invoice_header">Invoice</string>
+    <string name="service1">Standard</string>
+    <string name="service2">Major Repair</string>
+    <string name="service3">Software Update</string>
+    <string name="service4">Minor Repair</string>
+    <string name="service5">Paint Job</string>
+    <string name="service6">Tire</string>
+    <string name="logo">Logo</string>
 </resources>
