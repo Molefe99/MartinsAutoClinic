@@ -3,6 +3,7 @@ package com.example.martinsautoclinic;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +20,8 @@ public class AdminDashboard extends AppCompatActivity {
         setContentView(R.layout.activity_admin_dashbord);
     }
 
-    public void Change(View view)
+    //Redirecting to Appointments Screen
+    public void Appointments(View view)
     {
         //imgAppointment.findViewById(R.id.imgAppointment);
         //txtAppointment.findViewById(R.id.txtAppointment);
@@ -27,4 +29,53 @@ public class AdminDashboard extends AppCompatActivity {
         Intent intent = new Intent(this, BookAppointment.class);
         startActivity(intent);
     }
+
+    //Redirecting to Quotes Screen
+    public void Quotes(View view)
+    {
+        //imgAppointment.findViewById(R.id.imgAppointment);
+        //txtAppointment.findViewById(R.id.txtAppointment);
+
+        Intent intent = new Intent(this, QuotesActivity.class);
+        startActivity(intent);
+    }
+
+    //Redirecting to Services Screen
+    public void Services(View view)
+    {
+        //imgAppointment.findViewById(R.id.imgAppointment);
+        //txtAppointment.findViewById(R.id.txtAppointment);
+
+        Intent intent = new Intent(this, ServicesActivity.class);
+        startActivity(intent);
+    }
+
+    //Redirecting to ClientsInfo Screen
+    public void ClientsInfo(View view)
+    {
+        //imgAppointment.findViewById(R.id.imgAppointment);
+        //txtAppointment.findViewById(R.id.txtAppointment);
+
+        Intent intent = new Intent(this, ClientsActivity.class);
+        startActivity(intent);
+    }
+
+    //Redirecting to Announcements Screen
+    public void Announcements(View view)
+    {
+        //imgAppointment.findViewById(R.id.imgAppointment);
+        //txtAppointment.findViewById(R.id.txtAppointment);
+
+        Intent intent = new Intent(this, SetAnnouncementsActivity.class);
+        startActivity(intent);
+    }
+
+    //Redirecting to Announcements Screen
+    public void ComingSoon(View view)
+    {
+        String message = "Coming Soon!";
+
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
 }

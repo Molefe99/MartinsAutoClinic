@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context=".Payment">
+    tools:context=".InvoiceActivity">
 
     <TextView
         android:id="@+id/txtHeader"
