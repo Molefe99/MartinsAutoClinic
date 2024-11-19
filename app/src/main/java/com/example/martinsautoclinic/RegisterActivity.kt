@@ -1,6 +1,5 @@
 package com.example.martinsautoclinic
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -10,6 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -20,6 +20,8 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var etConfirmPassword: EditText
     private lateinit var btnRegister: Button
     private lateinit var tvLogin: TextView
+
+    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +35,9 @@ class RegisterActivity : AppCompatActivity() {
         etConfirmPassword = findViewById(R.id.etConfirmPassword)
         btnRegister = findViewById(R.id.btnRegister)
         tvLogin = findViewById(R.id.tvLogin)
+
+        // Initialize Firebase Auth
+        firebaseAuth = FirebaseAuth.getInstance()
 
         // Set click listener for the register button
         btnRegister.setOnClickListener {
@@ -89,20 +94,17 @@ class RegisterActivity : AppCompatActivity() {
             return
         }
 
-        // Save user information and redirect to login
-        saveUserInformation(username, phoneNumber, emailAddress, password)
-        showToast("Registration successful")
-        redirectToLogin()
-    }
-
-    private fun saveUserInformation(username: String, phoneNumber: String, emailAddress: String, password: String) {
-        val sharedPref = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
-        val editor = sharedPref.edit()
-        editor.putString("username", username)
-        editor.putString("phoneNumber", phoneNumber)
-        editor.putString("emailAddress", emailAddress)
-        editor.putString("password", password)
-        editor.apply() // Save the data
+        // Firebase Authentication sign up
+        firebaseAuth.createUserWithEmailAndPassword(emailAddress, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Registration successful
+                    showToast("Registration successful")
+                    redirectToLogin()
+                } else {
+                    showToast("Error: ${task.exception?.message}")
+                }
+            }
     }
 
     private fun isValidEmail(email: String): Boolean {
