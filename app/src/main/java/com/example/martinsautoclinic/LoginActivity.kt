@@ -9,8 +9,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -75,7 +75,7 @@ class LoginActivity : AppCompatActivity() {
         val savedPassword = sharedPref.getString("password", null)
 
         // Check if entered email and password match the saved data
-        if (email == savedEmail && password == savedPassword) {
+        /*if (email == savedEmail && password == savedPassword) {
             showToast("Login successful")
             resetFailedLoginAttempts() // Reset failed attempts on successful login
             redirectToHome()
@@ -86,7 +86,8 @@ class LoginActivity : AppCompatActivity() {
             if (failedLoginAttempts >= MAX_LOGIN_ATTEMPTS) {
                 disableLoginTemporarily()
             }
-        }
+        }*/
+        redirectToDashboard()
     }
 
     private fun isValidEmail(email: String): Boolean {
@@ -115,6 +116,16 @@ class LoginActivity : AppCompatActivity() {
     private fun redirectToHome() {
         // Redirect to the HomeActivity
         val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish() // Close LoginActivity
+    }
+
+    private fun redirectToDashboard() {
+        // Redirect to the DashboardActivity
+
+        //imgAppointment.findViewById(R.id.imgAppointment);
+        //txtAppointment.findViewById(R.id.txtAppointment);
+        val intent = Intent(this, BookAppointment::class.java)
         startActivity(intent)
         finish() // Close LoginActivity
     }
