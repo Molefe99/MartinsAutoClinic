@@ -53,7 +53,7 @@ public class BookAppointment extends AppCompatActivity {
 
     public void Book(View view)
     {
-        Intent intent = new Intent(this, Payment.class);
+        Intent intent = new Intent(this, InvoiceActivity.class);
         startActivity(intent);
     }
 
