@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application
         android:allowBackup="true"
@@ -11,52 +11,51 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MartinsAutoClinic"
-        tools:targetApi="31" >
+        tools:targetApi="31">
+        <activity
+            android:name=".SetAnnouncementsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ClientsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ServicesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuotesActivity"
+            android:exported="false" />
         <activity
             android:name=".InvoiceActivity"
-            android:exported="false" />
-        <!-- Set LoginActivity as the launcher activity -->
+            android:exported="false" /> <!-- Set LoginActivity as the launcher activity -->
         <activity
             android:name=".AdminDashboard"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Declaration of RegisterActivity -->
+        </activity> <!-- Declaration of RegisterActivity -->
         <activity
             android:name=".RegisterActivity"
-            android:exported="true" />
-
-        <!-- Declaration of HomeActivity -->
+            android:exported="true" /> <!-- Declaration of HomeActivity -->
         <activity
             android:name=".HomeActivity"
-            android:exported="true" />
-
-        <!-- Declaration of AdminDashboard -->
-        <!--        <activity-->
-        <!--            android:name=".AdminDashboard"-->
-        <!--            android:exported="false" />-->
-
+            android:exported="true" /> <!-- Declaration of AdminDashboard -->
+        <!-- <activity -->
+        <!-- android:name=".AdminDashboard" -->
+        <!-- android:exported="false" /> -->
         <!-- Declaration of Payment -->
-        <!--        <activity-->
-        <!--            android:name=".Payment"-->
-        <!--            android:exported="false" />-->
-
+        <!-- <activity -->
+        <!-- android:name=".Payment" -->
+        <!-- android:exported="false" /> -->
         <!-- Declaration of BookAppointment -->
         <activity
             android:name=".BookAppointment"
-            android:exported="false" />
-
-        <!-- Declaration of BookingSuccessful -->
+            android:exported="false" /> <!-- Declaration of BookingSuccessful -->
         <activity
             android:name=".BookingSuccessful"
             android:exported="false" />
-
-
     </application>
 
 </manifest>
