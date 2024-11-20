@@ -9,7 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 
 class LoginActivity : AppCompatActivity() {
 
@@ -22,7 +22,7 @@ class LoginActivity : AppCompatActivity() {
     private var failedLoginAttempts = 0
     private val MAX_LOGIN_ATTEMPTS = 3
 
-    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var databaseReference: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,31 +35,30 @@ class LoginActivity : AppCompatActivity() {
         tvForgotPassword = findViewById(R.id.tvForgotPassword)
         tvRegister = findViewById(R.id.tvRegister)
 
-        // Initialize Firebase Auth
-        firebaseAuth = FirebaseAuth.getInstance()
+        // Initialize Firebase Database reference
+        databaseReference = FirebaseDatabase.getInstance().reference
 
         // Set click listener for login button
         btnLogin.setOnClickListener {
             validateLogin()
         }
 
-        // Set click listener for forgot password
-        tvForgotPassword.setOnClickListener {
-            showForgotPasswordDialog()
+        // Disable register button if employees are not allowed to register
+        tvRegister.setOnClickListener {
+            Toast.makeText(this, "Registration is disabled.", Toast.LENGTH_SHORT).show()
         }
 
-        // Set click listener to redirect to register page
-        tvRegister.setOnClickListener {
-            redirectToRegister()
+        // Forgot password click listener
+        tvForgotPassword.setOnClickListener {
+            Toast.makeText(this, "Forgot password functionality not implemented.", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun validateLogin() {
-        // Get input values
         val email = etEmailLogin.text.toString().trim()
         val password = etPasswordLogin.text.toString().trim()
 
-        // Validate email and password
+        // Validate input
         if (TextUtils.isEmpty(email)) {
             showToast("Please enter an email address")
             return
@@ -73,23 +72,48 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
-        // Firebase Authentication sign in
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Login successful
-                    showToast("Login successful")
-                    resetFailedLoginAttempts() // Reset failed attempts on successful login
-                    redirectToHome()
+        // Replace periods in email with commas for Firebase key compatibility
+        val formattedEmailKey = email.replace(".", ",")
+
+        // Check if the email is in "Employees"
+        databaseReference.child("employees").child(formattedEmailKey).get().addOnCompleteListener { employeeTask ->
+            if (employeeTask.isSuccessful && employeeTask.result.exists()) {
+                val dbPassword = employeeTask.result.child("password").getValue(String::class.java)
+                if (dbPassword == password) {
+                    // Redirect to admin dashboard
+                    showToast("Welcome, Admin!")
+                    resetFailedLoginAttempts()
+                    redirectToAdminDashboard()
                 } else {
                     failedLoginAttempts++
-                    showToast("Invalid email or password")
-
+                    showToast("Invalid password for Admin")
                     if (failedLoginAttempts >= MAX_LOGIN_ATTEMPTS) {
                         disableLoginTemporarily()
                     }
                 }
+            } else {
+                // Check if the email is in "Users"
+                databaseReference.child("users").child(formattedEmailKey).get().addOnCompleteListener { userTask ->
+                    if (userTask.isSuccessful && userTask.result.exists()) {
+                        val dbPassword = userTask.result.child("password").getValue(String::class.java)
+                        if (dbPassword == password) {
+                            // Redirect to home page
+                            showToast("Welcome, User!")
+                            resetFailedLoginAttempts()
+                            redirectToHomePage()
+                        } else {
+                            failedLoginAttempts++
+                            showToast("Invalid password for User")
+                            if (failedLoginAttempts >= MAX_LOGIN_ATTEMPTS) {
+                                disableLoginTemporarily()
+                            }
+                        }
+                    } else {
+                        showToast("Email not found in Employees or Users")
+                    }
+                }
             }
+        }
     }
 
     private fun isValidEmail(email: String): Boolean {
@@ -107,65 +131,22 @@ class LoginActivity : AppCompatActivity() {
     private fun disableLoginTemporarily() {
         btnLogin.isEnabled = false
         showToast("Too many failed attempts. Try again in 30 seconds.")
-
-        // Disable the login button for 30 seconds
         btnLogin.postDelayed({
             btnLogin.isEnabled = true
             showToast("You can try logging in again.")
-        }, 30000) // 30 seconds delay
+        }, 30000)
     }
 
-    private fun redirectToHome() {
-        // Redirect to the HomeActivity
+    private fun redirectToAdminDashboard() {
+        val intent = Intent(this, AdminDashboard::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun redirectToHomePage() {
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
-        finish() // Close LoginActivity
-    }
-
-    private fun redirectToRegister() {
-        // Redirect to the RegisterActivity
-        val intent = Intent(this, RegisterActivity::class.java)
-        startActivity(intent)
-        finish() // Close LoginActivity
-    }
-
-    private fun showForgotPasswordDialog() {
-        // Create a dialog to enter the email for password reset
-        val builder = android.app.AlertDialog.Builder(this)
-        builder.setTitle("Reset Password")
-
-        // Set up the input
-        val input = EditText(this)
-        input.hint = "Enter your email address"
-        builder.setView(input)
-
-        // Set up the buttons
-        builder.setPositiveButton("Reset") { dialog, _ ->
-            val email = input.text.toString().trim()
-            if (TextUtils.isEmpty(email)) {
-                showToast("Please enter an email address")
-            } else if (!isValidEmail(email)) {
-                showToast("Please enter a valid email address")
-            } else {
-                resetPassword(email)
-            }
-            dialog.dismiss()
-        }
-        builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
-
-        builder.show()
-    }
-
-    private fun resetPassword(email: String) {
-        // Firebase password reset method
-        firebaseAuth.sendPasswordResetEmail(email)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    showToast("Password reset instructions sent to your email")
-                } else {
-                    showToast("Error: ${task.exception?.message}")
-                }
-            }
+        finish()
     }
 }
 
