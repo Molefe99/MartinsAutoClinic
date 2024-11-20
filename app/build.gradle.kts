@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -39,10 +40,21 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+    implementation (libs.androidx.lifecycle.viewmodel.ktx.v261)
+    implementation (libs.androidx.lifecycle.livedata.ktx)
+    implementation (libs.kotlinx.coroutines.android)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.gridlayout)
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.firebase.database)
+    implementation(libs.adapters)
+    implementation (libs.androidx.cardview)
+    implementation(libs.androidx.work.runtime)
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
