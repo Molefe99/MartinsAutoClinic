@@ -13,6 +13,9 @@
         android:theme="@style/Theme.MartinsAutoClinic"
         tools:targetApi="31">
         <activity
+            android:name=".RequestQuote"
+            android:exported="false" />
+        <activity
             android:name=".SetAnnouncementsActivity"
             android:exported="false" />
         <activity
