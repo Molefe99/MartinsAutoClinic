@@ -1,6 +1,5 @@
 package com.example.martinsautoclinic
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -10,7 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AlertDialog
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
 
@@ -23,6 +22,8 @@ class LoginActivity : AppCompatActivity() {
     private var failedLoginAttempts = 0
     private val MAX_LOGIN_ATTEMPTS = 3
 
+    private lateinit var firebaseAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -33,6 +34,9 @@ class LoginActivity : AppCompatActivity() {
         btnLogin = findViewById(R.id.btnLogin)
         tvForgotPassword = findViewById(R.id.tvForgotPassword)
         tvRegister = findViewById(R.id.tvRegister)
+
+        // Initialize Firebase Auth
+        firebaseAuth = FirebaseAuth.getInstance()
 
         // Set click listener for login button
         btnLogin.setOnClickListener {
@@ -69,24 +73,23 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
-        // Retrieve saved user data from SharedPreferences
-        val sharedPref = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
-        val savedEmail = sharedPref.getString("emailAddress", null)
-        val savedPassword = sharedPref.getString("password", null)
+        // Firebase Authentication sign in
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Login successful
+                    showToast("Login successful")
+                    resetFailedLoginAttempts() // Reset failed attempts on successful login
+                    redirectToHome()
+                } else {
+                    failedLoginAttempts++
+                    showToast("Invalid email or password")
 
-        // Check if entered email and password match the saved data
-        if (email == savedEmail && password == savedPassword) {
-            showToast("Login successful")
-            resetFailedLoginAttempts() // Reset failed attempts on successful login
-            redirectToHome()
-        } else {
-            failedLoginAttempts++
-            showToast("Invalid email or password")
-
-            if (failedLoginAttempts >= MAX_LOGIN_ATTEMPTS) {
-                disableLoginTemporarily()
+                    if (failedLoginAttempts >= MAX_LOGIN_ATTEMPTS) {
+                        disableLoginTemporarily()
+                    }
+                }
             }
-        }
     }
 
     private fun isValidEmail(email: String): Boolean {
@@ -128,7 +131,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun showForgotPasswordDialog() {
         // Create a dialog to enter the email for password reset
-        val builder = AlertDialog.Builder(this)
+        val builder = android.app.AlertDialog.Builder(this)
         builder.setTitle("Reset Password")
 
         // Set up the input
@@ -148,24 +151,21 @@ class LoginActivity : AppCompatActivity() {
             }
             dialog.dismiss()
         }
-        builder.setNegativeButton("Cancel") { dialog, _ ->
-            dialog.cancel()
-        }
+        builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
 
         builder.show()
     }
 
     private fun resetPassword(email: String) {
-        // Check if the email matches the registered email
-        val sharedPref = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
-        val savedEmail = sharedPref.getString("emailAddress", null)
-
-        if (email == savedEmail) {
-            // Allow the user to reset the password (for now, just show a success toast)
-            showToast("Password reset instructions sent to your email")
-        } else {
-            showToast("Email not found")
-        }
+        // Firebase password reset method
+        firebaseAuth.sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    showToast("Password reset instructions sent to your email")
+                } else {
+                    showToast("Error: ${task.exception?.message}")
+                }
+            }
     }
 }
 
