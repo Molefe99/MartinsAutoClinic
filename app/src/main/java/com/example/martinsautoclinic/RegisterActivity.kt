@@ -115,7 +115,12 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                Toast.makeText(this, "Registration failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                // Handle the error when email is already in use or other registration failures
+                if (task.exception?.message?.contains("The email address is already in use") == true) {
+                    Toast.makeText(this, "Email already in use. Please use another email.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Registration failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
