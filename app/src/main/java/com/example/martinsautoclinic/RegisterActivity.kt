@@ -10,6 +10,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -22,6 +24,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var tvLogin: TextView
 
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var databaseReference: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,93 +39,75 @@ class RegisterActivity : AppCompatActivity() {
         btnRegister = findViewById(R.id.btnRegister)
         tvLogin = findViewById(R.id.tvLogin)
 
-        // Initialize Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance()
+        databaseReference = FirebaseDatabase.getInstance().reference.child("Users")
 
-        // Set click listener for the register button
         btnRegister.setOnClickListener {
-            validateInputs()
-        }
+            val username = etUsername.text.toString().trim()
+            val email = etEmailAddress.text.toString().trim()
+            val phoneNumber = etPhoneNumber.text.toString().trim()
+            val password = etPassword.text.toString()
+            val confirmPassword = etConfirmPassword.text.toString()
 
-        // Redirect to login page if user already has an account
-        tvLogin.setOnClickListener {
-            redirectToLogin()
-        }
-    }
-
-    private fun validateInputs() {
-        // Get input values
-        val username = etUsername.text.toString().trim()
-        val phoneNumber = etPhoneNumber.text.toString().trim()
-        val emailAddress = etEmailAddress.text.toString().trim()
-        val password = etPassword.text.toString().trim()
-        val confirmPassword = etConfirmPassword.text.toString().trim()
-
-        // Validate username
-        if (TextUtils.isEmpty(username)) {
-            showToast("Please enter a username")
-            return
-        }
-
-        // Validate phone number
-        if (TextUtils.isEmpty(phoneNumber)) {
-            showToast("Please enter a phone number")
-            return
-        } else if (!isValidPhoneNumber(phoneNumber)) {
-            showToast("Please enter a valid phone number")
-            return
-        }
-
-        // Validate email address
-        if (TextUtils.isEmpty(emailAddress)) {
-            showToast("Please enter an email address")
-            return
-        } else if (!isValidEmail(emailAddress)) {
-            showToast("Please enter a valid email address")
-            return
-        }
-
-        // Validate password
-        if (TextUtils.isEmpty(password)) {
-            showToast("Please enter a password")
-            return
-        } else if (TextUtils.isEmpty(confirmPassword)) {
-            showToast("Please confirm your password")
-            return
-        } else if (password != confirmPassword) {
-            showToast("Passwords do not match")
-            return
-        }
-
-        // Firebase Authentication sign up
-        firebaseAuth.createUserWithEmailAndPassword(emailAddress, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Registration successful
-                    showToast("Registration successful")
-                    redirectToLogin()
-                } else {
-                    showToast("Error: ${task.exception?.message}")
-                }
+            if (validateInputs(username, email, phoneNumber, password, confirmPassword)) {
+                registerUser(username, email, phoneNumber, password)
             }
+        }
     }
 
-    private fun isValidEmail(email: String): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    private fun validateInputs(
+        username: String,
+        email: String,
+        phoneNumber: String,
+        password: String,
+        confirmPassword: String
+    ): Boolean {
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(email) || TextUtils.isEmpty(phoneNumber) ||
+            TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)
+        ) {
+            Toast.makeText(this, "All fields are required.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, "Enter a valid email address.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (password != confirmPassword) {
+            Toast.makeText(this, "Passwords do not match.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        return true
     }
 
-    private fun isValidPhoneNumber(phoneNumber: String): Boolean {
-        // Example: at least 10 digits for a phone number
-        return phoneNumber.length >= 10
-    }
+    private fun registerUser(username: String, email: String, phoneNumber: String, password: String) {
+        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val currentUser = firebaseAuth.currentUser
+                currentUser?.let { user ->
+                    val userId = user.uid
+                    val userMap = mapOf(
+                        "username" to username,
+                        "email" to email,
+                        "phoneNumber" to phoneNumber
+                    )
 
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun redirectToLogin() {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-        finish() // Close RegisterActivity
+                    databaseReference.child(userId).setValue(userMap).addOnCompleteListener { dbTask ->
+                        if (dbTask.isSuccessful) {
+                            Toast.makeText(this, "Registration successful!", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this, LoginActivity::class.java))
+                            finish()
+                        } else {
+                            Toast.makeText(this, "Failed to store user data.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            } else {
+                Toast.makeText(this, "Registration failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
+
