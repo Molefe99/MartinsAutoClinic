@@ -8,6 +8,10 @@ android {
     namespace = "com.example.martinsautoclinic"
     compileSdk = 34
 
+    viewBinding {
+        enable = true
+    }
+
     defaultConfig {
         applicationId = "com.example.martinsautoclinic"
         minSdk = 24
