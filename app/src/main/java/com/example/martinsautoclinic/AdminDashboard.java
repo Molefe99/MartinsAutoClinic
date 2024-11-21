@@ -82,7 +82,8 @@ public class AdminDashboard extends AppCompatActivity {
         txtComingSoon2.setOnClickListener(view -> navigateToActivity(ClientInformationActivity.class));
 
         // Announcement Module
-        imgComingSoon3.setOnClickListener(view -> navigateToActivity(AnnouncementActivity.class));
+        View imgAnnouncement;
+        imgAnnouncement.setOnClickListener(view -> navigateToActivity(AnnouncementActivity.class));
         txtComingSoon3.setOnClickListener(view -> navigateToActivity(AnnouncementActivity.class));
 
         // Coming Soon Module

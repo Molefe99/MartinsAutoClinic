@@ -9,6 +9,7 @@ import androidx.room.RoomDatabase
 @Database(entities = [Client::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun clientDao(): ClientDao
+    abstract fun announcementDao(): AnnouncementDao
 
     companion object {
         @Volatile
@@ -20,7 +21,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "client_database"
-                ).build()
+
+                ).fallbackToDestructiveMigration() // Handle version upgrades
+                    .build()
                 INSTANCE = instance
                 instance
             }

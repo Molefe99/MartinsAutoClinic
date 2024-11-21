@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
 
@@ -50,9 +51,25 @@
         <activity android:name=".ClientInformationActivity"
             android:label="Client Information" />
 
+        <!-- Invoice Activity -->
+        <activity android:name=".InvoiceActivity"
+            android:label="Invoice Activity" />
+
+        <!-- Payment Activity -->
+        <activity android:name=".Payment"
+            android:label="Payment" />
+
+        <!-- Services Activity -->
+        <activity android:name=".ServicesActivity"
+            android:label="Services Activity" />
+
         <!-- Quotes Activity -->
         <activity android:name=".QuotesActivity"
             android:label="Quotes Activity" />
+
+        <!-- Confirmed Bookings Activity -->
+        <activity android:name=".ConfirmedBookingsActivity"
+            android:label="Confirmed Bookings Activity" />
 
 
 

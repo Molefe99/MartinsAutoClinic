@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tv_heading" type="id">Tv Heading</item>
+    <item name="card_booking_1" type="id">Card Booking 1</item>
+    <item name="tv_customer_name_1" type="id">Tv Customer Name 1</item>
+    <item name="tv_booking_date_1" type="id">Tv Booking Type Date 1</item>
+    <item name="tv_service_type_1" type="id">Tv Service Type 1</item>
+    <item name="card_booking_2" type="id">Card Booking 2</item>
+    <item name="tv_customer_name_2" type="id">Tv Customer Name 2</item>
+    <item name="tv_booking_date_2" type="id">Tv Booking Date 2</item>
+    <item name="tv_service_type_2" type="id">Tv Service Type 2</item>
+</resources>
