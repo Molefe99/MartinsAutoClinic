@@ -18,7 +18,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo2"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -27,8 +27,47 @@
 
         <!-- Set LoginActivity as the launcher activity -->
         <activity
+
+            android:name=".ClientViewPricing"
+            android:exported="false" />
+        <activity
+            android:name=".AddService"
+            android:exported="false" />
+        <activity
+            android:name=".EditAndUploadCatalogue"
+            android:exported="false"
+            android:label="@string/activity_edit_and_upload_catalogue"/>
+        <activity
+            android:name=".ItemInformationChanges"
+            android:exported="false" />
+        <activity
+            android:name=".RequestQuote"
+            android:exported="false"
+            android:label="@string/activity_request_quote" />
+        <activity
+            android:name=".SetAnnouncementsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ClientsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ServicesActivity"
+            android:exported="false"
+            android:label="@string/activity_service" />
+        <activity
+            android:name=".QuotesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".InvoiceActivity"
+            android:exported="false" /> <!-- Set LoginActivity as the launcher activity -->
+        <activity
+            android:name=".AdminDashboard"
+           
+            android:label="@string/activity_admin_dashbord">
+
             android:name=".LoginActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -43,6 +82,24 @@
         <!-- Declaration of HomeActivity -->
         <activity
             android:name=".HomeActivity"
+
+            android:exported="true"
+            android:label="@string/activity_main" /> <!-- Declaration of AdminDashboard -->
+        <!-- <activity -->
+        <!-- android:name=".AdminDashboard" -->
+        <!-- android:exported="false" /> -->
+        <!-- Declaration of Payment -->
+        <!-- <activity -->
+        <!-- android:name=".Payment" -->
+        <!-- android:exported="false" /> -->
+        <!-- Declaration of BookAppointment -->
+        <activity
+            android:name=".BookAppointment"
+            android:exported="false" /> <!-- Declaration of BookingSuccessful -->
+        <activity
+            android:name=".BookingSuccessful"
+            android:exported="false" />
+
             android:exported="true" />
 
         <!-- Admin Dashboard Activity -->

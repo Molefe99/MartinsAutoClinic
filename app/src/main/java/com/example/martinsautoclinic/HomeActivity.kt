@@ -26,5 +26,8 @@ class HomeActivity : AppCompatActivity() {
             imgAnnouncement.visibility = View.GONE
             tvNoAnnouncements.visibility = View.VISIBLE
         }
+
     }
+
+}
 }

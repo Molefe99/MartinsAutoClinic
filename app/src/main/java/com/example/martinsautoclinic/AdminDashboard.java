@@ -3,6 +3,7 @@ package com.example.martinsautoclinic;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +24,32 @@ public class AdminDashboard extends AppCompatActivity {
 
         // Initialize views
         initializeViews();
+
+        finish(); // Optional: Prevents activity stacking
+        //Intent intent = new Intent(this, BookAppointment.class);
+        //startActivity(intent);
+    }
+
+    //Redirecting to Quotes Screen
+    public void Quotes(View view)
+    {
+        //imgAppointment.findViewById(R.id.imgAppointment);
+        //txtAppointment.findViewById(R.id.txtAppointment);
+
+        Intent intent = new Intent(this, QuotesActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    //Redirecting to Services Screen
+    public void Services(View view)
+    {
+        //imgAppointment.findViewById(R.id.imgAppointment);
+        //txtAppointment.findViewById(R.id.txtAppointment);
+
+        Intent intent = new Intent(this, ServicesActivity.class);
+        startActivity(intent);
+        finish();
 
         // Set up click listeners
         setupClickListeners();
@@ -88,6 +115,7 @@ public class AdminDashboard extends AppCompatActivity {
         // Coming Soon Module
         imgComingSoon4.setOnClickListener(view -> showToast("Coming Soon!"));
         txtComingSoon4.setOnClickListener(view -> showToast("Coming Soon!"));
+
     }
 
     /**
@@ -96,6 +124,7 @@ public class AdminDashboard extends AppCompatActivity {
     public void navigateToAppointment(View view) {
         Intent intent = new Intent(this, BookAppointment.class);
         startActivity(intent);
+        finish();
     }
 
     /**
@@ -106,6 +135,7 @@ public class AdminDashboard extends AppCompatActivity {
     private void navigateToActivity(Class<?> targetActivity) {
         Intent intent = new Intent(AdminDashboard.this, targetActivity);
         startActivity(intent);
+        finish();
     }
 
     /**
