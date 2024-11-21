@@ -48,8 +48,6 @@ class EditAndUploadCatalogue : AppCompatActivity() {
         binding = ActivityEditAndUploadCatalogueBinding.inflate(layoutInflater);
         setContentView(binding.root);
 
-
-
         lifecycleScope.launch {
 
             val testingData = retrieveServicesFromDatabase("TestingDB")
@@ -66,7 +64,7 @@ class EditAndUploadCatalogue : AppCompatActivity() {
         val retrieveCatalog = findViewById<Button>(R.id.buttonRetrieveCatalogue)
 
         backToMainCatalogue.setOnClickListener{
-            val intent = Intent(this, CatalogueMain::class.java)
+            val intent = Intent(this, ServicesActivity::class.java)
             startActivity(intent)
         }
         val buttonAddServicePage = findViewById<Button>(R.id.buttonAddServicePage)
@@ -102,66 +100,25 @@ class EditAndUploadCatalogue : AppCompatActivity() {
             }
         }
 
-        /*database.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                serviceList.clear();
-
-                for (recordSnapshot in snapshot.children) {
-                    val primaryKey = recordSnapshot.key
-                    val serviceName =
-                        recordSnapshot.child("serviceName").getValue(String::class.java)
-                    val servicePrice =
-                        recordSnapshot.child("servicePrice").getValue(String::class.java)
-                    val serviceType =
-                        recordSnapshot.child("serviceType").getValue(String::class.java)
-                    val serviceOrder =
-                        recordSnapshot.child("orderNumber").getValue(Int::class.java)
-
-                    if (serviceName != null && primaryKey != null && servicePrice != null && serviceType != null) {
-                        serviceList.add(
-                            dataClassServicesObjects(
-                                primaryKey,
-                                serviceName,
-                                servicePrice,
-                                serviceType,
-                                serviceOrder
-                            )
-                        )
-                    }
-                }
-                val serviceList123 = serviceList.sortedBy { it.orderNumber }.toMutableList()
-                adapter.updateServices(serviceList123) // Update the adapter with the sorted list
-                (binding.RecyclerViewEditCatalogue.adapter as? AdapterCatalogueRecyclerView)?.notifyDataSetChanged()
-
-            }
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })*/
-
 
         buttonSave.setOnClickListener {
 
             AssigningOrder(serviceList)
-            //val p = serviceList[3].orderNumber
-            //val o = serviceList[3].serviceName
+
             val listLenght = serviceList.size - 1;
             for (x in 0..listLenght){
                 updateingData(serviceList[x].primaryKey,serviceList[x].serviceName,serviceList[x].servicePrice,serviceList[x].serviceType,serviceList[x].orderNumber)
             }
             Toast.makeText(this, "Successfull", Toast.LENGTH_SHORT).show()
 
-
-            /*if (p != null) {
-                Toast.makeText(this, p.toString() +": "+o, Toast.LENGTH_SHORT).show()
-            }if (d != null) {
-                Toast.makeText(this,d.serviceName,Toast.LENGTH_LONG).show()
-            }*/
+            val database = FirebaseDatabase.getInstance().getReference("TestingDB")
+            database.removeValue()
+            lifecycleScope.launch {
+                val testingData = retrieveServicesFromDatabase("TestingDB")
+                adapter.updateServices(testingData)
+                binding.RecyclerViewEditCatalogue.adapter?.notifyDataSetChanged()
+            }
         }
-
-
-
 
 
         adapter = AdapterCatalogueRecyclerView(serviceList) { selectedItem ->
@@ -236,7 +193,7 @@ class EditAndUploadCatalogue : AppCompatActivity() {
 
                     override fun onCancelled(error: DatabaseError) {
                         // Resume the coroutine with an error
-                        continuation.resumeWith(Result.failure(error.toException()))
+                        //continuation.resumeWith(Result.failure(error.toException()))
                     }
                 })
             }

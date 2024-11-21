@@ -13,6 +13,9 @@
         android:theme="@style/Theme.MartinsAutoClinic"
         tools:targetApi="31">
         <activity
+            android:name=".ClientViewPricing"
+            android:exported="false" />
+        <activity
             android:name=".CatalogueMain"
             android:exported="false" />
         <activity
@@ -20,13 +23,15 @@
             android:exported="false" />
         <activity
             android:name=".EditAndUploadCatalogue"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/activity_edit_and_upload_catalogue"/>
         <activity
             android:name=".ItemInformationChanges"
             android:exported="false" />
         <activity
             android:name=".RequestQuote"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/activity_request_quote" />
         <activity
             android:name=".SetAnnouncementsActivity"
             android:exported="false" />
@@ -35,7 +40,8 @@
             android:exported="false" />
         <activity
             android:name=".ServicesActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/activity_service" />
         <activity
             android:name=".QuotesActivity"
             android:exported="false" />
@@ -44,7 +50,8 @@
             android:exported="false" /> <!-- Set LoginActivity as the launcher activity -->
         <activity
             android:name=".AdminDashboard"
-            android:exported="true">
+            android:exported="true"
+            android:label="@string/activity_admin_dashbord">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -56,7 +63,8 @@
             android:exported="true" /> <!-- Declaration of HomeActivity -->
         <activity
             android:name=".HomeActivity"
-            android:exported="true" /> <!-- Declaration of AdminDashboard -->
+            android:exported="true"
+            android:label="@string/activity_main" /> <!-- Declaration of AdminDashboard -->
         <!-- <activity -->
         <!-- android:name=".AdminDashboard" -->
         <!-- android:exported="false" /> -->

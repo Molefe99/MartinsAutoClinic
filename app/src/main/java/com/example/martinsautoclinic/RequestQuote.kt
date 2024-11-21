@@ -53,10 +53,10 @@ class RequestQuote : AppCompatActivity() {
         clearText()
 
         val btnBack = findViewById<Button>(R.id.buttonBack)
-        /*btnBack.setOnClickListener {
-            val intent = Intent(this, CatalogueMain::class.java)
+        btnBack.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
-        }*/
+        }
 
 
         buttonAddImage.setOnClickListener {

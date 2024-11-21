@@ -36,7 +36,7 @@ class AddService : AppCompatActivity() {
 
 //Retrieve use input
         buttonAddService = findViewById(R.id.ButtonAddService);
-        buttonBacktoMainCatalogue = findViewById(R.id.ButtonBackTomMainCatalogue);
+        buttonBacktoMainCatalogue = findViewById(R.id.ButtonBackTomMainCatalogue1);
 
         checkboxHeading = findViewById<CheckBox>(R.id.checkBoxHeading);
         checkboxService = findViewById<CheckBox>(R.id.checkBoxService);
@@ -83,7 +83,7 @@ class AddService : AppCompatActivity() {
 
         //button to come back to main menu
         buttonBacktoMainCatalogue.setOnClickListener{
-            val intent = Intent(this, CatalogueMain::class.java)
+            val intent = Intent(this, EditAndUploadCatalogue::class.java)
             startActivity(intent)
         }
 
@@ -182,7 +182,7 @@ class AddService : AppCompatActivity() {
         //val service = ModelCatalogueServices(type,headingOrServiceName,servicePrice,order);
         val service = dataClassServicesObjects(privateKey,headingOrServiceName,servicePrice,type,order)
 
-        dbRef.child(privateKey).setValue(service).addOnCompleteListener{
+        dbRef.child(privateKey).setValue(service).addOnSuccessListener{
 
             Toast.makeText(this,"Data has been inserted",Toast.LENGTH_LONG).show()
 

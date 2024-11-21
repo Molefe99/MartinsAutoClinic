@@ -5,25 +5,41 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ItemInformationChanges">
+    tools:context=".ItemInformationChanges"
+    android:background="@color/background">
+
+
+    <TextView
+        android:id="@+id/txtHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        android:text="Changes"
+        android:textAlignment="center"
+        android:textColor="@color/header"
+        android:textSize="52sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextHeadingChanges"
-        android:layout_width="299dp"
-        android:layout_height="52dp"
+        android:layout_width="354dp"
+        android:layout_height="49dp"
         android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="Not Applicable"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxHeadingChanges" />
 
     <CheckBox
         android:id="@+id/checkBoxServiceChanges"
-        android:layout_width="302dp"
-        android:layout_height="58dp"
+        android:layout_width="356dp"
+        android:layout_height="41dp"
         android:layout_marginTop="24dp"
         android:text="Service"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,18 +49,18 @@
 
     <CheckBox
         android:id="@+id/checkBoxHeadingChanges"
-        android:layout_width="302dp"
-        android:layout_height="58dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="350dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="36dp"
         android:text="Heading"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/txtHeader" />
 
     <EditText
         android:id="@+id/editTextServiceNameChanges"
-        android:layout_width="303dp"
+        android:layout_width="356dp"
         android:layout_height="52dp"
         android:layout_marginTop="28dp"
         android:ems="10"
@@ -57,8 +73,8 @@
 
     <EditText
         android:id="@+id/editTextNumberServicePriceChanges"
-        android:layout_width="300dp"
-        android:layout_height="52dp"
+        android:layout_width="359dp"
+        android:layout_height="49dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="Not Applicable"
@@ -66,26 +82,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextServiceNameChanges" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Makes chang"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.102" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextServiceNameChanges"
+        />
 
     <Button
         android:id="@+id/buttonSaveChanges"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="28dp"
         android:backgroundTint="@android:color/holo_red_dark"
         android:text="Save"
         android:textStyle="bold"

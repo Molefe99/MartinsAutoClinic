@@ -57,7 +57,7 @@ class ItemInformationChanges : AppCompatActivity() {
         startUpLayout()
 
 
-        val database1 = FirebaseDatabase.getInstance().getReference("Products")
+        val database1 = FirebaseDatabase.getInstance().getReference("TestingDB")
 
         buttonBackToEditCatalog.setOnClickListener{
             val intent = Intent(this, EditAndUploadCatalogue::class.java)
@@ -87,7 +87,7 @@ class ItemInformationChanges : AppCompatActivity() {
 
         buttonSaveChanges.setOnClickListener {
 
-            val database12 = FirebaseDatabase.getInstance().getReference("Products").child(selectedItem)
+            val database12 = FirebaseDatabase.getInstance().getReference("TestingDB").child(selectedItem)
 
             if (isHeading) {
 
