@@ -186,7 +186,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imgComingSoon2"
+                    android:id="@+id/imgClientsInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/client_information"
@@ -194,7 +194,7 @@
                     android:src="@drawable/teamwork" />
 
                 <TextView
-                    android:id="@+id/txtComingSoon2"
+                    android:id="@+id/txtClientsInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="ClientsInfo"
@@ -228,7 +228,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imgComingSoon3"
+                    android:id="@+id/imgAnnouncements"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/announcements"
@@ -236,7 +236,7 @@
                     android:src="@drawable/announcement" />
 
                 <TextView
-                    android:id="@+id/txtComingSoon3"
+                    android:id="@+id/txtAnnouncements"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="Announcements"

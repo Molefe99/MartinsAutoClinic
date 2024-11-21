@@ -19,5 +19,10 @@
     <string name="service5">Paint Job</string>
     <string name="service6">Tire</string>
     <string name="logo">Logo</string>
-    <string name="back_button">Back Button</string>
+    <string name="review">Review</string>
+    <string name="services">SERVICES</string>
+    <string name="quotes">QUOTES</string>
+    <string name="client_information">CLIENT \nINFORMATION</string>
+    <string name="announcements">ANNOUNCEMENTS</string>
+    <string name="coming_soon">COMING SOON</string>
 </resources>

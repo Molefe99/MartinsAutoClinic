@@ -4,8 +4,14 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 
 class HomeActivity : AppCompatActivity() {
+
+    private lateinit var imgAnnouncement: ImageView;
+    private lateinit var tvNoAnnouncements: TextView;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_page)

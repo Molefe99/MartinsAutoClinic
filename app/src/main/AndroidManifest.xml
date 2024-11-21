@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <!-- Permission for managing external storage -->
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+<!--    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />-->
     <!-- Permission for reading external storage -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <!-- Permission for writing external storage -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" 
-        android:maxSdkVersion="32"/>
-  
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
     <!-- Internet permission for network access -->
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -24,43 +25,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MartinsAutoClinic"
         tools:targetApi="31">
-
+        <activity
+            android:name=".AdminDashboard"
+            android:exported="false"
+            android:label="Admin Dashboard" />
         <!-- Set LoginActivity as the launcher activity -->
         <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Declaration of RegisterActivity -->
+        </activity> <!-- Declaration of RegisterActivity -->
         <activity
             android:name=".RegisterActivity"
-            android:exported="true" />
-
-        <!-- Declaration of HomeActivity -->
+            android:exported="true" /> <!-- Declaration of HomeActivity -->
         <activity
             android:name=".HomeActivity"
-            android:exported="true" />
-
-        <!-- Admin Dashboard Activity -->
-        <activity android:name=".AdminDashboard"
-            android:label="Admin Dashboard" />
-
-        <!-- Announcement Activity -->
-        <activity android:name=".AnnouncementActivity"
-            android:label="Announcements" />
-
-        <!-- Client Information Activity -->
-        <activity android:name=".ClientInformationActivity"
-            android:label="Client Information" />
-
-        <!-- Quotes Activity -->
-        <activity android:name=".QuotesActivity"
+            android:exported="true" /> <!-- Announcement Activity -->
+        <activity
+            android:name=".AnnouncementActivity"
+            android:label="Announcements" /> <!-- Client Information Activity -->
+        <activity
+            android:name=".ClientInformationActivity"
+            android:label="Client Information" /> <!-- Quotes Activity -->
+        <activity
+            android:name=".QuotesActivity"
             android:label="Quotes Activity" />
-
     </application>
 
 </manifest>
