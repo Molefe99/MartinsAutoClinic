@@ -24,9 +24,9 @@
 
                     <TextView
                         android:id="@+id/txtHeader"
-                        android:layout_width="386dp"
-                        android:layout_height="69dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_marginTop="15dp"
                         android:background="@color/primary"
                         android:text="Manage"
                         android:textAlignment="center"
@@ -40,10 +40,10 @@
 
                     <Button
                         android:id="@+id/buttonAddServicePage"
-                        android:layout_width="149dp"
-                        android:layout_height="63dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="36dp"
-                        android:backgroundTint="@android:color/holo_red_dark"
+                        android:background="@color/primary"
                         android:text="Add Elements"
                         android:textColor="@color/header"
                         android:textStyle="bold"
@@ -57,7 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:backgroundTint="@android:color/holo_red_dark"
+                        android:background="@color/primary"
                         android:textStyle="bold"
                         android:textColor="@color/header"
                         android:text="Retrieve Current Catalogue"
@@ -72,7 +72,7 @@
                         android:layout_marginTop="16dp"
                         android:textColor="@color/header"
                         android:text="Clear Catalogue"
-                        android:backgroundTint="@android:color/holo_red_dark"
+                        android:background="@color/primary"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="36dp"
                         android:textColor="@color/header"
-                        android:backgroundTint="@android:color/holo_red_dark"
+                        android:background="@color/primary"
                         android:text="Save changes and Upload"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -110,10 +110,11 @@
                         android:id="@+id/backToMainCatalogue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/header"
                         android:layout_marginTop="20dp"
-                        android:backgroundTint="@android:color/holo_red_dark"
+                        android:layout_marginBottom="10dp"
+                        android:background="@color/primary"
                         android:text="Back"
+                        android:textColor="@color/header"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -128,7 +129,6 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <!-- Loading Overlay -->
         <FrameLayout
             android:id="@+id/loadingOverlay"
             android:layout_width="match_parent"

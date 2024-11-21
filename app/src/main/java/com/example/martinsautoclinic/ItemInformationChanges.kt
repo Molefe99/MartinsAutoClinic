@@ -35,10 +35,6 @@ class ItemInformationChanges : AppCompatActivity() {
     private lateinit var checkBoxServiceChanges : CheckBox;
     private lateinit var checkBoxHeadingChanges : CheckBox;
 
-    private var titleChanges : Boolean = false;
-    private var SerivcesChanges : Boolean = false;
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_information_changes)
@@ -56,7 +52,6 @@ class ItemInformationChanges : AppCompatActivity() {
 
         startUpLayout()
 
-
         val database1 = FirebaseDatabase.getInstance().getReference("TestingDB")
 
         buttonBackToEditCatalog.setOnClickListener{
@@ -65,7 +60,6 @@ class ItemInformationChanges : AppCompatActivity() {
         }
 
         val intent = intent
-        // Retrieve the string data passed with the key "item_data"
         val selectedItem = intent.getStringExtra("primaryKey").toString()
 
 
@@ -88,7 +82,6 @@ class ItemInformationChanges : AppCompatActivity() {
         buttonSaveChanges.setOnClickListener {
 
             val database12 = FirebaseDatabase.getInstance().getReference("TestingDB").child(selectedItem)
-
             if (isHeading) {
 
                 if (editTextHeadingChanges.text.isNotEmpty()) {
@@ -155,18 +148,14 @@ class ItemInformationChanges : AppCompatActivity() {
                     }
                 }
             }
-
         }
-
-
     }
 
     private fun retrieveInformation(primaryKey: String) {
         lifecycleScope.launch {
-            // Perform the task and wait for it to complete
+
             val isServiceData = performTask(primaryKey)
 
-            // Now update the UI based on the fetched data
             if (isServiceData) {
                 Toast.makeText(this@ItemInformationChanges, "Service data is true", Toast.LENGTH_LONG).show()
 
@@ -191,16 +180,14 @@ class ItemInformationChanges : AppCompatActivity() {
             var isServiceData = false
             database = FirebaseDatabase.getInstance().getReference("TestingDB")
 
-            // Perform the Firebase database fetch operation
             val snapshot =
-                database.child(primaryKey).get().await()  // Using Kotlin's await() to ensure completion
+                database.child(primaryKey).get().await()
 
             if (snapshot.exists()) {
                 serviceName = snapshot.child("serviceName").value.toString()
                 servicePrice = snapshot.child("servicePrice").value.toString()
                 type = snapshot.child("serviceType").value.toString()
 
-                // Determine the type of data (Heading or Service)
                 if (type == "HeadingData") {
                     isHeading = true
                 } else if (type == "ServiceData") {

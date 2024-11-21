@@ -32,18 +32,15 @@ class AddService : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_service)
 
-
-
-//Retrieve use input
         buttonAddService = findViewById(R.id.ButtonAddService);
         buttonBacktoMainCatalogue = findViewById(R.id.ButtonBackTomMainCatalogue1);
 
-        checkboxHeading = findViewById<CheckBox>(R.id.checkBoxHeading);
-        checkboxService = findViewById<CheckBox>(R.id.checkBoxService);
+        checkboxHeading = findViewById(R.id.checkBoxHeading);
+        checkboxService = findViewById(R.id.checkBoxService);
 
-        editTextHeading = findViewById<EditText>(R.id.editTextHeading);
-        editTextServiceName = findViewById<EditText>(R.id.editTextServiceName);
-        editTextServicePrice = findViewById<EditText>(R.id.editTextNumberServicePrice);
+        editTextHeading = findViewById(R.id.editTextHeading);
+        editTextServiceName = findViewById(R.id.editTextServiceName);
+        editTextServicePrice = findViewById(R.id.editTextNumberServicePrice);
 
         //resetting components to default state
         startUp();
@@ -51,7 +48,7 @@ class AddService : AppCompatActivity() {
         //if header checkbox is true
         checkboxHeading.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                // Uncheck checkBox2 when checkBox1 is checked
+
                 checkboxHeading.isEnabled = false;
                 checkboxService.isEnabled = true;
                 editTextHeading.isEnabled = true;
@@ -86,7 +83,6 @@ class AddService : AppCompatActivity() {
             val intent = Intent(this, EditAndUploadCatalogue::class.java)
             startActivity(intent)
         }
-
 
         //button to add the service or heading text to database
         buttonAddService.setOnClickListener {
@@ -177,9 +173,7 @@ class AddService : AppCompatActivity() {
         dbRef = FirebaseDatabase.getInstance().getReference("TestingDB");
 
         val privateKey = dbRef.push().key.toString();
-        //val generateKey = headingOrServiceName
 
-        //val service = ModelCatalogueServices(type,headingOrServiceName,servicePrice,order);
         val service = dataClassServicesObjects(privateKey,headingOrServiceName,servicePrice,type,order)
 
         dbRef.child(privateKey).setValue(service).addOnSuccessListener{

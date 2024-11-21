@@ -23,7 +23,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/txtHeader"
@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:backgroundTint="@android:color/holo_red_dark"
+                    android:backgroundTint="@color/primary"
                     android:text="Send Request"
                     android:textColor="@color/header"
                     android:textStyle="bold"
@@ -79,6 +79,7 @@
                     android:layout_marginTop="16dp"
                     android:backgroundTint="@color/primary"
                     android:text="Add Image"
+                    android:textColor="@color/header"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -102,6 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="Add Image (Optional)"
+                    android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.108"
                     app:layout_constraintStart_toStartOf="parent"
@@ -129,13 +131,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
+                    android:layout_marginBottom="30dp"
                     android:backgroundTint="@color/primary"
                     android:text="Back"
                     android:textColor="@color/header"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/buttonSendRequest" />
+                    app:layout_constraintTop_toBottomOf="@+id/buttonSendRequest"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <ImageView
                     android:id="@+id/imageViewChosenPicture"

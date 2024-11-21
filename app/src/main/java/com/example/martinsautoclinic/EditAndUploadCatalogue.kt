@@ -2,6 +2,7 @@ package com.example.martinsautoclinic
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
@@ -144,13 +145,11 @@ class EditAndUploadCatalogue : AppCompatActivity() {
 
     suspend fun performSequentialTasks() {
         withContext(Dispatchers.IO) {
-            // Step 1: Read data from "Products"
+
             val productsData = retrieveServicesFromDatabase("Products")
 
-            // Step 2: Copy data to "TestingDB"
             writeServicesToDatabase("TestingDB", productsData)
 
-            // Step 3: Retrieve and update the RecyclerView with data from "TestingDB"
             val testingData = retrieveServicesFromDatabase("TestingDB")
             withContext(Dispatchers.Main) {
                 adapter.updateServices(testingData)
@@ -164,7 +163,6 @@ class EditAndUploadCatalogue : AppCompatActivity() {
             val services = mutableListOf<dataClassServicesObjects>()
             val dbRef = FirebaseDatabase.getInstance().getReference(databasePath)
 
-            // Suspend the coroutine until the Firebase operation completes
             suspendCoroutine<List<dataClassServicesObjects>> { continuation ->
                 dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
@@ -187,13 +185,11 @@ class EditAndUploadCatalogue : AppCompatActivity() {
                                 )
                             }
                         }
-                        // Pass the sorted services list to the continuation
                         continuation.resume(services.sortedBy { it.orderNumber })
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        // Resume the coroutine with an error
-                        //continuation.resumeWith(Result.failure(error.toException()))
+                        Log.d("ServiceActivity", "Error")
                     }
                 })
             }

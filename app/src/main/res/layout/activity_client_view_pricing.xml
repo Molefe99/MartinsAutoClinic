@@ -26,6 +26,7 @@
                         android:id="@+id/txtHeader"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:background="@color/primary"
                         android:text="@string/services"
                         android:textAlignment="center"
@@ -40,6 +41,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <!-- RecyclerView Section -->
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/RecyclerViewCurrent2"
                     android:layout_width="match_parent"
@@ -49,17 +51,19 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="86dp">
 
                     <Button
                         android:id="@+id/btnBackToHome"
-                        android:layout_width="148dp"
-                        android:layout_height="55dp"
-                        android:layout_marginTop="28dp"
-                        android:backgroundTint="@android:color/holo_red_dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@color/primary"
                         android:text="Back"
                         android:textColor="@color/header"
                         android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.498"
                         app:layout_constraintStart_toStartOf="parent"
