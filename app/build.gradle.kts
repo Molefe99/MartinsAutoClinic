@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.martinsautoclinic"
-    compileSdk = 34
+    compileSdk = 35
 
     viewBinding {
         enable = true
@@ -43,6 +43,9 @@ android {
 dependencies {
 
     implementation(libs.androidx.core.ktx)
+    {
+        exclude(group = "com.android.support")
+    }
     implementation(libs.androidx.appcompat)
     implementation (libs.androidx.lifecycle.viewmodel.ktx.v261)
     implementation (libs.androidx.lifecycle.livedata.ktx)
@@ -60,7 +63,15 @@ dependencies {
     implementation(libs.androidx.work.runtime)
     implementation(libs.androidx.recyclerview)
     implementation(libs.compiler)
+    implementation(libs.firebase.auth.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+configurations.all {
+    resolutionStrategy {
+        force("androidx.core:core:1.13.1")
+        force("com.google.guava:guava:31.1-jre")
+    }
 }

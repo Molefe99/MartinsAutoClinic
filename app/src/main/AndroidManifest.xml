@@ -59,14 +59,12 @@
             android:exported="false" />
         <activity
             android:name=".InvoiceActivity"
-            android:exported="false" /> <!-- Set LoginActivity as the launcher activity -->
+            android:exported="false" />
+        <!-- Set LoginActivity as the launcher activity -->
         <activity
             android:name=".AdminDashboard"
-           
-            android:label="@string/activity_admin_dashbord">
-
-            android:name=".LoginActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="Admin Dashboard">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -84,27 +82,23 @@
             android:name=".HomeActivity"
 
             android:exported="true"
-            android:label="@string/activity_main" /> <!-- Declaration of AdminDashboard -->
-        <!-- <activity -->
-        <!-- android:name=".AdminDashboard" -->
-        <!-- android:exported="false" /> -->
-        <!-- Declaration of Payment -->
-        <!-- <activity -->
-        <!-- android:name=".Payment" -->
-        <!-- android:exported="false" /> -->
+            android:label="@string/activity_main" />
+
         <!-- Declaration of BookAppointment -->
         <activity
             android:name=".BookAppointment"
-            android:exported="false" /> <!-- Declaration of BookingSuccessful -->
+            android:exported="false" />
+
+        <!-- Declaration of BookingSuccessful -->
         <activity
             android:name=".BookingSuccessful"
             android:exported="false" />
 
-            android:exported="true" />
-
         <!-- Admin Dashboard Activity -->
-        <activity android:name=".AdminDashboard"
-            android:label="Admin Dashboard" />
+<!--        <activity -->
+<!--            android:name=".AdminDashboard"-->
+<!--            android:exported="false"-->
+<!--            android:label="Admin Dashboard" />-->
 
         <!-- Announcement Activity -->
         <activity android:name=".AnnouncementActivity"
@@ -115,8 +109,8 @@
             android:label="Client Information" />
 
         <!-- Quotes Activity -->
-        <activity android:name=".QuotesActivity"
-            android:label="Quotes Activity" />
+<!--        <activity android:name=".QuotesActivity"-->
+<!--            android:label="Quotes Activity" />-->
 
     </application>
 
