@@ -8,6 +8,10 @@ android {
     namespace = "com.example.martinsautoclinic"
     compileSdk = 35
 
+    viewBinding {
+        enable = true
+    }
+
     defaultConfig {
         applicationId = "com.example.martinsautoclinic"
         minSdk = 24
@@ -53,6 +57,7 @@ dependencies {
     implementation(libs.androidx.room.common)
     implementation(libs.androidx.room.ktx)
     implementation(libs.firebase.database)
+    implementation(libs.firebase.storage.ktx)
     implementation(libs.adapters)
     implementation (libs.androidx.cardview)
     implementation(libs.androidx.work.runtime)

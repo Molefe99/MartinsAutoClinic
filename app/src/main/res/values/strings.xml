@@ -21,8 +21,14 @@
     <string name="logo">Logo</string>
     <string name="review">Review</string>
     <string name="services">SERVICES</string>
+    <string name="activity_admin_dashbord">AdminDashboard</string>
     <string name="quotes">QUOTES</string>
+    <string name="activity_edit_and_upload_catalogue">EditAndUploadCatalogue</string>
+    <string name="activity_main">MainActivity</string>
     <string name="client_information">CLIENT \nINFORMATION</string>
     <string name="announcements">ANNOUNCEMENTS</string>
+    <string name="activity_service">ServicesActivity</string>
+    <string name="activity_request_quote">RequestQuote</string>
     <string name="coming_soon">COMING SOON</string>
+    <string name="back_button">Back Button</string>
 </resources>

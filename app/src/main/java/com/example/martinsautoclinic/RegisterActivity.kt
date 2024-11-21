@@ -53,6 +53,11 @@ class RegisterActivity : AppCompatActivity() {
                 registerUser(username, email, phoneNumber, password)
             }
         }
+
+        tvLogin.setOnClickListener {
+            // Redirect to login screen
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
     }
 
     private fun validateInputs(
@@ -83,6 +88,10 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerUser(username: String, email: String, phoneNumber: String, password: String) {
+        // Format the email for Firebase key compatibility
+        val formattedEmail = email.replace(".", ",")  // Firebase does not support periods in keys
+
+        // Register the user using Firebase Authentication
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val currentUser = firebaseAuth.currentUser
@@ -94,7 +103,8 @@ class RegisterActivity : AppCompatActivity() {
                         "phoneNumber" to phoneNumber
                     )
 
-                    databaseReference.child(userId).setValue(userMap).addOnCompleteListener { dbTask ->
+                    // Save additional user data in Firebase Realtime Database under the formatted email
+                    databaseReference.child(formattedEmail).setValue(userMap).addOnCompleteListener { dbTask ->
                         if (dbTask.isSuccessful) {
                             Toast.makeText(this, "Registration successful!", Toast.LENGTH_SHORT).show()
                             startActivity(Intent(this, LoginActivity::class.java))
@@ -105,7 +115,12 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                Toast.makeText(this, "Registration failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                // Handle the error when email is already in use or other registration failures
+                if (task.exception?.message?.contains("The email address is already in use") == true) {
+                    Toast.makeText(this, "Email already in use. Please use another email.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Registration failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
