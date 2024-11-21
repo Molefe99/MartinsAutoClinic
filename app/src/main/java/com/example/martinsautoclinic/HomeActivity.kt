@@ -1,29 +1,33 @@
 package com.example.martinsautoclinic
 
-import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
+import android.view.View
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_page)
 
-        val btnRequestQuote = findViewById<Button>(R.id.btnRequestQuote)
+        // Initialize views
+        imgAnnouncement = findViewById(R.id.imgAnnouncement)
+        tvNoAnnouncements = findViewById(R.id.tvNoAnnouncements)
 
-        btnRequestQuote.setOnClickListener {
-        val intent = Intent(this, RequestQuote::class.java)
-        startActivity(intent)
+        // Check if there's an announcement image passed
+        val imageUriString = intent.getStringExtra("announcement_image_uri")
+        if (imageUriString != null) {
+            val imageUri = Uri.parse(imageUriString)
+            imgAnnouncement.setImageURI(imageUri)
+            imgAnnouncement.visibility = View.VISIBLE
+            tvNoAnnouncements.visibility = View.GONE
+        } else {
+            // Default state: No announcements available
+            imgAnnouncement.visibility = View.GONE
+            tvNoAnnouncements.visibility = View.VISIBLE
+        }
+
     }
 
-        val btnViewPricing = findViewById<Button>(R.id.btnViewPricing)
-
-        btnViewPricing.setOnClickListener {
-
-            val intent = Intent(this, ClientViewPricing::class.java)
-            startActivity(intent)
-
-        }
 }
 }
