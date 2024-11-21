@@ -22,7 +22,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="631dp">
+        android:layout_height="920dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,7 +68,7 @@
                 android:textSize="28sp" />
 
             <TextView
-                android:id="@+id/txtClientPhone"
+                android:id="@+id/txtPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
@@ -78,7 +78,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txtBookiePhone"
+                android:id="@+id/txtClientPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
@@ -87,7 +87,7 @@
                 android:textSize="28sp" />
 
             <TextView
-                android:id="@+id/txtClientEmail"
+                android:id="@+id/txtEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
@@ -97,7 +97,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txtBookieEmail"
+                android:id="@+id/txtClientEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
@@ -206,7 +206,7 @@
         android:id="@+id/btnCompleteBooking"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_gravity="bottom"
+        android:layout_gravity="end"
         android:background="@drawable/btn_primary"
         android:onClick="CompleteBooking"
         android:text="Complete Booking"
